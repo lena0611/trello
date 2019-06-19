@@ -1,6 +1,9 @@
 # trello
 
-> My astonishing Nuxt.js project
+> 간략 심플 트렐로 
+- 카드생성
+- 카드내 콘텐츠 생성
+- 콘텐츠 카드간 이동
 
 ## Build Setup
 
