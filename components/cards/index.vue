@@ -3,16 +3,23 @@
     <button @click="addCard">
       Add card
     </button>
+    <br>
     <hr>
+    <br>
     <div class="trello__content">
       <template v-if="cards.length">
-        <div v-for="(card, index) in cards" :key="index" class="trello__item">
+        <div
+          v-for="(card, index) in cards"
+          :key="index"
+          class="trello__item"
+        >
           <card
             :list="card.list"
             :title="card.title"
             :idx="index"
+            :id="card._id"
             :cards-length="cards.length"
-            @add-content="addContent"
+            @add-job="addJob"
             @move-card="moveCard"
           />
         </div>
@@ -44,27 +51,15 @@ export default {
       if (!title) {
         return
       }
-      this.$store.commit('cards/addCard', { title })
+      this.$store.dispatch('cards/addCard', { title })
     },
-    addContent({ text, idx }) {
-      this.$store.commit('cards/addContent', { cardIndex: idx, text })
+    addJob({ cardId, job }) {
+      this.$store.dispatch('cards/addJob', { cardId, job })
     },
-    moveCard({ cardIdx, contentIdx, direction }) {
-      this.$store.commit('cards/moveCard', { cardIdx, contentIdx, direction })
+    moveCard({ currentCardId, selectedJobId, direction }) {
+      // this.$store.commit('cards/moveCard', { cardIdx, contentIdx, direction })
+      this.$store.dispatch('cards/moveCard', { currentCardId, selectedJobId, direction })
     }
   }
 }
 </script>
-
-<style lang="scss">
-.trello {
-  &__content {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  &__item {
-    flex-basis: 200px;
-    margin: 0 10px;
-  }
-}
-</style>
