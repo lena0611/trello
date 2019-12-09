@@ -2,20 +2,17 @@ const { Router } = require('express');
 
 const router = Router();
 
-// Mock Users
-const users = [{ name: '홍길동' }, { name: '정일영' }];
-
-router.get('/users', function(req, res, next) {
-  res.json(users);
+router.post('/login', (req, res) => {
+  if (req.body.id === 'admin' && req.body.pw === '1111') {
+    req.session.authUser = req.body.id
+    return res.json({ id: 'admin' });
+  }
+  return res.json({ id: '' });
 });
 
-router.get('/users/:id', function(req, res, next) {
-  const id = parseInt(req.params.id);
-  if (id >= 0 && id < users.length) {
-    res.json(users[id]);
-  } else {
-    res.sendStatus(404);
-  }
+router.post('/logout', (req, res) => {
+  delete req.session.authUser;
+  res.json({ ok: true });
 });
 
 module.exports = router;

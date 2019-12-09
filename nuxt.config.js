@@ -1,4 +1,6 @@
 
+import bodyParser from 'body-parser'
+import session from 'express-session'
 require('dotenv').config();
 
 export default {
@@ -8,8 +10,18 @@ export default {
   },
   serverMiddleware: [
     // API middleware
+    bodyParser.json(),
+    session({
+      secret: 'super-secere-key',
+      resave: false,
+      saveUninitialized: false,
+      cookie: { maxAge: 60000 }
+    }),
     '~/api/index.js',
   ],
+  router: {
+    middleware: 'auth'
+  },
   env: {
     baseUrl: process.env.BASE_URL || 'http://localhost:3000',
   },

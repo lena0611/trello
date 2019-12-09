@@ -1,5 +1,16 @@
 <template>
   <div class="trello">
+    <div v-if="$store.state.authUser">
+      Welcome, {{ $store.state.authUser }}
+      <button @click="logout">
+        로그아웃
+      </button>
+    </div>
+    <div v-else>
+      <nuxt-link to="/login">
+        로그인
+      </nuxt-link>
+    </div>
     <button @click="addCard">
       Add card
     </button>
@@ -58,6 +69,9 @@ export default {
     },
     moveCard({ currentCardId, selectedJobId, direction }) {
       this.$store.dispatch('cards/moveCard', { currentCardId, selectedJobId, direction })
+    },
+    logout() {
+      this.$store.dispatch('logout')
     }
   }
 }

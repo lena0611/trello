@@ -3,10 +3,12 @@ const app         = express();
 const bodyParser  = require('body-parser');
 const mongoose    = require('mongoose');
 const cards       = require('./routes/cards');
+const users       = require('./routes/users');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cards);
+app.use(users);
 
 
 const mongooseOptions = {
