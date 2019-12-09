@@ -15,7 +15,7 @@ const mongooseOptions = {
   useFindAndModify: false,
   useCreateIndex: true,
 };
-  
+
 // mongoose 연결
 mongoose.connect(
     'mongodb://localhost:27017/trello',
@@ -26,7 +26,7 @@ mongoose.connect(
     }
   );
   mongoose.set('debug', true);
-  
+
 
 module.exports = {
   path: '/api',

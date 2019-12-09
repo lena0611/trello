@@ -57,7 +57,6 @@ export default {
       this.$store.dispatch('cards/addJob', { cardId, job })
     },
     moveCard({ currentCardId, selectedJobId, direction }) {
-      // this.$store.commit('cards/moveCard', { cardIdx, contentIdx, direction })
       this.$store.dispatch('cards/moveCard', { currentCardId, selectedJobId, direction })
     }
   }
